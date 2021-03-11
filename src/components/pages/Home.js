@@ -1,9 +1,9 @@
 import React from "react";
-import GuestForm from "../guests/guestForm/GuestForm";
-import GuestCounter from "../guests/GuestCounter";
-import GuestFilter from "../guests/GuestFilter";
-import GuestSearch from "../guests/GuestSearch";
-import Guests from "../guests/Guests";
+import GuestForm from "../guests/GuestForm/GuestForm";
+import GuestCounter from "../guests/GuestCounter/GuestCounter";
+import GuestFilter from "../guests/GuestFilter/GuestFilter";
+import GuestSearch from "../guests/GuestSearch/GuestSearch";
+import Guests from "../guests/GuestsGrid/Guests";
 
 const Home = () => {
   return (
