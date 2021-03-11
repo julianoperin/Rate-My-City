@@ -1,4 +1,5 @@
 import React from "react";
+import "./Guest.css";
 
 const Guest = () => {
   return (

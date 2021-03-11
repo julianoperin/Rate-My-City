@@ -1,5 +1,5 @@
 import React from "react";
-import GuestForm from "../guests/GuestForm";
+import GuestForm from "../guests/guestForm/GuestForm";
 import GuestCounter from "../guests/GuestCounter";
 import GuestFilter from "../guests/GuestFilter";
 import GuestSearch from "../guests/GuestSearch";
