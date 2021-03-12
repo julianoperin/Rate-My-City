@@ -14,9 +14,6 @@ const GuestCounter = () => {
   const attendingByDiet = (type) =>
     attending.filter((guest) => guest.dietary === type).length;
 
-  console.log(totalInvited);
-  console.log(attending);
-
   return (
     <div>
       <table>
