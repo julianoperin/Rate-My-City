@@ -2,16 +2,15 @@ import React from "react";
 import "./Guest.css";
 
 const Guest = ({ guest }) => {
-  const { id, name, phone, dietary, isconfirmed } = guest;
+  const { name, phone, dietary, isconfirmed } = guest;
 
   return (
     <div className="guest-card">
       <div className="card-head">
         <div>
-          <label>
-            {" "}
+          <label className={`${isconfirmed && "confirm"}`}>
             Confirmed
-            <i className="fas fa-check-square ">
+            <i className={`fas fa-check-square ${isconfirmed && "confirm"}`}>
               <input type="checkbox" />
             </i>
           </label>
@@ -30,7 +29,7 @@ const Guest = ({ guest }) => {
         <span className="badge red">{dietary}</span>
         <div className="contact">
           <i className="fas fa-phone-alt" />
-          <p>444 333 7777</p>
+          <p>{phone}</p>
         </div>
       </div>
     </div>
