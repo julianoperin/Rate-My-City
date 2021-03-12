@@ -42,10 +42,10 @@ const GuestState = (props) => {
   };
 
   //! Search Guest
-  const searchGuest = () => {
+  const searchGuest = (guest) => {
     dispatch({
       type: SEARCH_GUEST,
-      // payload: guest,
+      payload: guest,
     });
   };
 
@@ -61,6 +61,7 @@ const GuestState = (props) => {
       value={{
         guests: state.guests,
         filterGuest: state.filterGuest,
+        search: state.search,
         toggleFilter,
         searchGuest,
         clearSearch,
