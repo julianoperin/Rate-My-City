@@ -16,14 +16,14 @@ const GuestState = (props) => {
         id: 2,
         name: "Jane Leonida",
         phone: "333 444 555",
-        dietary: "Vegan",
+        dietary: "Pescetarians",
         isconfirmed: false,
       },
       {
         id: 3,
         name: "Carla Spohr",
         phone: "333 444 555",
-        dietary: "Vegan",
+        dietary: "Non-Vegan",
         isconfirmed: true,
       },
       {

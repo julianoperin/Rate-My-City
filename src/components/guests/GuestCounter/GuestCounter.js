@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import GuestContext from "../../../context/guestContext/guestContext";
 
 const GuestCounter = () => {
+  const { guests } = useContext(GuestContext);
+
+  const totalInvited = guests.length;
+  const attending = guests.filter((guest) => guest.isconfirmed);
+
+  console.log(totalInvited);
+  console.log(attending);
+
   return (
     <div>
       <table>

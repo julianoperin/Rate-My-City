@@ -26,7 +26,18 @@ const Guest = ({ guest }) => {
       </div>
       <div className="card-body">
         <h2>{name}</h2>
-        <span className="badge red">{dietary}</span>
+        <span
+          className={
+            "badge " +
+            (dietary === "Non-Veg"
+              ? "red"
+              : dietary === "Vegan"
+              ? "green"
+              : "seaGreen")
+          }
+        >
+          {dietary}
+        </span>
         <div className="contact">
           <i className="fas fa-phone-alt" />
           <p>{phone}</p>
