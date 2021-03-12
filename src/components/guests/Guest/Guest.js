@@ -1,7 +1,9 @@
 import React from "react";
 import "./Guest.css";
 
-const Guest = () => {
+const Guest = ({ guest }) => {
+  const { id, name, phone, dietary, isconfirmed } = guest;
+
   return (
     <div className="guest-card">
       <div className="card-head">
@@ -24,8 +26,8 @@ const Guest = () => {
         </div>
       </div>
       <div className="card-body">
-        <h2>John Doe</h2>
-        <span className="badge red">'Non-Veg'</span>
+        <h2>{name}</h2>
+        <span className="badge red">{dietary}</span>
         <div className="contact">
           <i className="fas fa-phone-alt" />
           <p>444 333 7777</p>
