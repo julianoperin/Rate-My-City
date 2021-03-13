@@ -4,10 +4,18 @@ import {
   CLEAR_SEARCH,
   ADD_GUEST,
   REMOVE_GUEST,
+  UPDATE_GUEST,
 } from "../types";
 
 export default (state, { type, payload }) => {
   switch (type) {
+    case UPDATE_GUEST:
+      return {
+        ...state,
+        guests: state.guests.map((guest) =>
+          guest.id === payload.id ? payload : guest
+        ),
+      };
     case REMOVE_GUEST:
       return {
         ...state,

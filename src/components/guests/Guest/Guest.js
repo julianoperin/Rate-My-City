@@ -3,17 +3,25 @@ import "./Guest.css";
 import GuestContext from "../../../context/guestContext/guestContext";
 
 const Guest = ({ guest }) => {
-  const { removeGuest } = useContext(GuestContext);
-  const { id, name, phone, dietary, isconfirmed } = guest;
+  const { removeGuest, updateGuest } = useContext(GuestContext);
+  const { id, name, phone, dietary, isConfirmed } = guest;
+
+  const handleRemove = () => {
+    removeGuest(id);
+  };
+
+  const handleIsConfirmed = () => {
+    updateGuest({ ...guest, isConfirmed: !isConfirmed });
+  };
 
   return (
     <div className="guest-card">
       <div className="card-head">
         <div>
-          <label className={`${isconfirmed && "confirm"}`}>
+          <label className={`${isConfirmed && "confirm"}`}>
             Confirmed
-            <i className={`fas fa-check-square ${isconfirmed && "confirm"}`}>
-              <input type="checkbox" />
+            <i className={`fas fa-check-square ${isConfirmed && "confirm"}`}>
+              <input type="checkbox" onChange={handleIsConfirmed} />
             </i>
           </label>
         </div>
@@ -21,7 +29,7 @@ const Guest = ({ guest }) => {
           <button>
             <i className="fas fa-user-edit"></i>
           </button>
-          <button onClick={() => removeGuest(id)}>
+          <button onClick={handleRemove}>
             <i className="fas fa-trash-alt remove"></i>
           </button>
         </div>
