@@ -5,10 +5,22 @@ import {
   ADD_GUEST,
   REMOVE_GUEST,
   UPDATE_GUEST,
+  EDIT_GUEST,
+  CLEAR_GUEST,
 } from "../types";
 
 export default (state, { type, payload }) => {
   switch (type) {
+    case EDIT_GUEST:
+      return {
+        ...state,
+        editAble: payload,
+      };
+    case CLEAR_GUEST:
+      return {
+        ...state,
+        editAble: null,
+      };
     case UPDATE_GUEST:
       return {
         ...state,

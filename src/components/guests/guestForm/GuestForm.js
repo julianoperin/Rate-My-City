@@ -1,15 +1,32 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./GuestForm.css";
 import GuestContext from "../../../context/guestContext/guestContext";
 
 const GuestForm = () => {
-  const { addGuest } = useContext(GuestContext);
+  const { addGuest, editAble, updateGuest, clearGuest } = useContext(
+    GuestContext
+  );
+  useEffect(() => {
+    if (editAble !== null) {
+      setGuest(editAble);
+    } else {
+      setGuest({
+        name: "",
+        phone: "",
+        dietary: "Non-Veg",
+      });
+    }
+  }, [editAble]);
 
   const [guest, setGuest] = useState({
     name: "",
     phone: "",
     dietary: "Non-Veg",
   });
+
+  if (editAble !== null) {
+    console.log(editAble);
+  }
 
   const { name, phone, dietary } = guest;
 
@@ -22,13 +39,17 @@ const GuestForm = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(guest);
-    addGuest(guest);
-    setGuest({
-      name: "",
-      phone: "",
-      dietary: "Non-Veg",
-    });
+    if (editAble !== null) {
+      updateGuest(guest);
+      clearGuest();
+    } else {
+      addGuest(guest);
+      setGuest({
+        name: "",
+        phone: "",
+        dietary: "Non-Veg",
+      });
+    }
   };
 
   return (
@@ -56,7 +77,7 @@ const GuestForm = () => {
             <input
               type="radio"
               name="dietary"
-              Value="Non-Veg"
+              value="Non-Veg"
               checked={dietary === "Non-Veg"}
               onChange={handleChange}
             />
@@ -67,7 +88,8 @@ const GuestForm = () => {
             <input
               type="radio"
               name="dietary"
-              Value="Vegan"
+              value="Vegan"
+              checked={dietary === "Vegan"}
               onChange={handleChange}
             />
             <span className="checkmark"></span>
@@ -77,7 +99,8 @@ const GuestForm = () => {
             <input
               type="radio"
               name="dietary"
-              Value="Pesacatarian"
+              value="Pesacatarian"
+              checked={dietary === "Pesacatarian"}
               onChange={handleChange}
             />
             <span className="checkmark"></span>
