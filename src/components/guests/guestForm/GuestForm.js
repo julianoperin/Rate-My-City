@@ -24,10 +24,6 @@ const GuestForm = () => {
     dietary: "Non-Veg",
   });
 
-  if (editAble !== null) {
-    console.log(editAble);
-  }
-
   const { name, phone, dietary } = guest;
 
   const handleChange = (e) => {
@@ -54,7 +50,7 @@ const GuestForm = () => {
 
   return (
     <div className="invite-section">
-      <h1>Invite Someone</h1>
+      <h1>{editAble !== null ? "Edit Guest" : "Invite Someone"}</h1>
       <form onSubmit={onSubmit}>
         <input
           type="text"
@@ -106,7 +102,19 @@ const GuestForm = () => {
             <span className="checkmark"></span>
           </label>
         </div>
-        <input type="submit" value="Add Guest" className="btn" />
+        <input
+          type="submit"
+          value={editAble !== null ? "Update Guest" : "Add Guest"}
+          className="btn"
+        />
+        {editAble !== null ? (
+          <input
+            className="btn clear-btn"
+            type="button"
+            onClick={clearGuest}
+            value="Clear Form"
+          />
+        ) : null}
       </form>
     </div>
   );
