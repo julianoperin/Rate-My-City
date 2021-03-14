@@ -13,7 +13,7 @@ const Login = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     console.log(user);
   };
@@ -21,13 +21,20 @@ const Login = () => {
   return (
     <div className="login">
       <h1>Sign In</h1>
-      <form>
-        <input type="email" name="email" placeholder="Email" value={email} />
+      <form onSubmit={onSubmit}>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={handleChange}
+        />
         <input
           type="password"
           name="password"
           placeholder="Password"
           value={password}
+          onChange={handleChange}
         />
 
         <input type="submit" value="Sign In" className="btn" />
