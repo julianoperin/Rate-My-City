@@ -18,7 +18,7 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
+    loginUser({ email, password });
   };
 
   return (
@@ -43,6 +43,13 @@ const Login = () => {
         <input type="submit" value="Sign In" className="btn" />
       </form>
       <div className="question">
+        {errors !== null && (
+          <button className="danger">
+            {errors.msg ? errors.msg : errors.error[0].msg} //! Because of
+            express validator
+            <span>X</span>
+          </button>
+        )}
         <p>
           Don't have an account? <Link to="/register">Sign Up</Link>
         </p>

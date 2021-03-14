@@ -17,7 +17,7 @@ export default (state, action) => {
       };
     case FAIL_REGISTER:
     case FAIL_LOGIN:
-      localStorage.setItem("token", action.payload.token);
+      //   localStorage.setItem("token", action.payload.token);
       return {
         ...state,
         userAuth: null,

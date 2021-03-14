@@ -23,7 +23,7 @@ const Register = () => {
     if (password !== password2) {
       console.log("passowords does not match");
     } else {
-      console.log(user);
+      registerUser({ name, email, password });
     }
   };
 
@@ -62,6 +62,13 @@ const Register = () => {
         <input type="submit" value="Sign Up" className="btn" />
       </form>
       <div className="question">
+        {errors !== null && (
+          <button className="danger">
+            {errors.msg ? errors.msg : errors.error[0].msg} //! Because of
+            express validator
+            <span>X</span>
+          </button>
+        )}
         <p>
           Already have an account? <Link to="/login">Login</Link>
         </p>
