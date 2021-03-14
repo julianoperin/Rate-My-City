@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layouts/navbar/Navbar";
 import Home from "./components/pages/Home";
 import GuestState from "./context/guestContext/GuestState";
-import AuthState from "./context/AuthContext/GuestState";
+import AuthState from "./context/authContext/AuthState";
 import Register from "./components/pages/Register";
 import Login from "./components/pages/Login";
 

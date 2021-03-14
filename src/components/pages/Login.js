@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/authContext/authContext";
 
 const Login = () => {
+  const { loginUser, userAuth, errors } = useContext(AuthContext);
+
   const [user, setUser] = useState({
     email: "",
     password: "",

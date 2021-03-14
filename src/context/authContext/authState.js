@@ -1,45 +1,76 @@
 import React, { useReducer } from "react";
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
-import {SUCCESS_REGISTER,SUCCESS_LOGIN,FAIL_REGISTER,FAIL_LOGIN} from "../types.js";
+import {
+  SUCCESS_REGISTER,
+  SUCCESS_LOGIN,
+  FAIL_REGISTER,
+  FAIL_LOGIN,
+} from "../types.js";
 
-import axios from 'axios'
+import axios from "axios";
 
-const authState = (props) => {
+const AuthState = (props) => {
   const initialState = {
     userAuth: null,
     errors: null,
   };
 
-  const [state, dispatch] = useReducer(guestReducer, initialState);
+  const [state, dispatch] = useReducer(authReducer, initialState);
 
   //! Register User
-  const registerUser = (userData) => {
+  const registerUser = async (userData) => {
     const config = {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
     try {
-        const res = await axios.post("/register", userData, config);
-        //! res.data is from the BackEnd
-        dispatch(
-            {
-                type: SUCCESS_REGISTER,
-                payload: res.data
-            })
-
+      const res = await axios.post("/register", userData, config);
+      // res.data is from the BackEnd
+      dispatch({
+        type: SUCCESS_REGISTER,
+        payload: res.data,
+      });
     } catch (error) {
-        
+      dispatch({
+        type: FAIL_REGISTER,
+        payload: error.response.data,
+      });
     }
-  }
+  };
+
+  //! Login User
+  const loginUser = async (userData) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post("/auth", userData, config);
+      // res.data is from the BackEnd
+      dispatch({
+        type: SUCCESS_LOGIN,
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: FAIL_LOGIN,
+        payload: error.response.data,
+      });
+    }
+  };
 
   return (
     <AuthContext.Provider
       value={{
         userAuth: state.userAuth,
         errors: state.errors,
+        registerUser,
+        loginUser,
       }}
     >
       {props.children}
@@ -47,4 +78,4 @@ const authState = (props) => {
   );
 };
 
-export default authState;
+export default AuthState;

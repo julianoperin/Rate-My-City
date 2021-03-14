@@ -6,6 +6,7 @@ export const ADD_GUEST = "ADD_GUEST";
 export const REMOVE_GUEST = "REMOVE_GUEST";
 export const UPDATE_GUEST = "UPDATE_GUEST";
 export const EDIT_GUEST = "EDIT_GUEST";
+export const CLEAR_GUEST = "CLEAR_GUEST";
 
 //! Auth
 export const SUCCESS_REGISTER = "SUCCESS_REGISTER";
