@@ -37,6 +37,7 @@ const Register = () => {
           placeholder="Name"
           value={name}
           onChange={handleChange}
+          required
         />
         <input
           type="email"
@@ -44,6 +45,7 @@ const Register = () => {
           placeholder="Email"
           value={email}
           onChange={handleChange}
+          required
         />
         <input
           type="password"
@@ -51,6 +53,9 @@ const Register = () => {
           placeholder="Password"
           value={password}
           onChange={handleChange}
+          pattern=".{6,}"
+          required
+          title="6 characters minimum"
         />
         <input
           type="password"
@@ -58,14 +63,16 @@ const Register = () => {
           placeholder="Confirm Password"
           value={password2}
           onChange={handleChange}
+          pattern=".{6,}"
+          required
+          title="6 characters minimum"
         />
         <input type="submit" value="Sign Up" className="btn" />
       </form>
       <div className="question">
         {errors !== null && (
           <button className="danger">
-            {errors.msg ? errors.msg : errors.error[0].msg} //! Because of
-            express validator
+            {errors.length > 0 ? errors[0].msg : errors.msg}
             <span>X</span>
           </button>
         )}

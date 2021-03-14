@@ -31,6 +31,7 @@ const Login = () => {
           placeholder="Email"
           value={email}
           onChange={handleChange}
+          required
         />
         <input
           type="password"
@@ -38,6 +39,9 @@ const Login = () => {
           placeholder="Password"
           value={password}
           onChange={handleChange}
+          required
+          title="6 characters minimum"
+          required
         />
 
         <input type="submit" value="Sign In" className="btn" />
@@ -45,8 +49,7 @@ const Login = () => {
       <div className="question">
         {errors !== null && (
           <button className="danger">
-            {errors.msg ? errors.msg : errors.error[0].msg} //! Because of
-            express validator
+            {errors.msg ? errors.msg : errors.msg}
             <span>X</span>
           </button>
         )}
