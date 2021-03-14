@@ -1,9 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/authContext/authContext";
 
-const Register = () => {
-  const { registerUser, userAuth, errors } = useContext(AuthContext);
+const Register = (props) => {
+  const { registerUser, userAuth, errors, setError, clearError } = useContext(
+    AuthContext
+  );
+
+  useEffect(() => {
+    if (userAuth) {
+      props.history.push("/");
+    }
+  }, [userAuth, props.history]);
+
+  //! Clear errors automatically after 2 sec
+  if (errors) {
+    setTimeout(() => {
+      clearError();
+    }, 3000);
+  }
 
   const [user, setUser] = useState({
     name: "",
@@ -16,14 +31,16 @@ const Register = () => {
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+    clearError();
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (password !== password2) {
-      console.log("passowords does not match");
+      setError({ msg: "Passowords does not match" });
     } else {
       registerUser({ name, email, password });
+      clearError();
     }
   };
 
@@ -73,7 +90,7 @@ const Register = () => {
         {errors !== null && (
           <button className="danger">
             {errors.length > 0 ? errors[0].msg : errors.msg}
-            <span>X</span>
+            <span onClick={() => clearError()}>X</span>
           </button>
         )}
         <p>

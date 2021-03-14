@@ -6,6 +6,8 @@ import {
   SUCCESS_LOGIN,
   FAIL_REGISTER,
   FAIL_LOGIN,
+  SET_ERROR,
+  CLEAR_ERROR,
 } from "../types.js";
 
 import axios from "axios";
@@ -64,6 +66,19 @@ const AuthState = (props) => {
     }
   };
 
+  const setError = (err) => {
+    dispatch({
+      type: SET_ERROR,
+      payload: err,
+    });
+  };
+
+  const clearError = () => {
+    dispatch({
+      type: CLEAR_ERROR,
+    });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -71,6 +86,8 @@ const AuthState = (props) => {
         errors: state.errors,
         registerUser,
         loginUser,
+        setError,
+        clearError,
       }}
     >
       {props.children}

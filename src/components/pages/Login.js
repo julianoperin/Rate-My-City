@@ -1,9 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/authContext/authContext";
 
-const Login = () => {
-  const { loginUser, userAuth, errors } = useContext(AuthContext);
+const Login = (props) => {
+  const { loginUser, userAuth, errors, clearError } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (userAuth) {
+      props.history.push("/");
+    }
+  }, [userAuth, props.history]);
+
+  //! Clear errors automatically after 2 sec
+  if (errors) {
+    setTimeout(() => {
+      clearError();
+    }, 3000);
+  }
 
   const [user, setUser] = useState({
     email: "",
@@ -14,11 +27,13 @@ const Login = () => {
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+    clearError();
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     loginUser({ email, password });
+    clearError();
   };
 
   return (
@@ -50,7 +65,7 @@ const Login = () => {
         {errors !== null && (
           <button className="danger">
             {errors.msg ? errors.msg : errors.msg}
-            <span>X</span>
+            <span onClick={() => clearError()}>X</span>
           </button>
         )}
         <p>

@@ -3,6 +3,8 @@ import {
   SUCCESS_LOGIN,
   FAIL_REGISTER,
   FAIL_LOGIN,
+  SET_ERROR,
+  CLEAR_ERROR,
 } from "../types.js";
 
 export default (state, action) => {
@@ -24,7 +26,16 @@ export default (state, action) => {
         userAuth: null,
         errors: action.payload,
       };
-
+    case SET_ERROR:
+      return {
+        ...state,
+        errors: action.payload,
+      };
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        errors: null,
+      };
     default:
       return state;
   }
