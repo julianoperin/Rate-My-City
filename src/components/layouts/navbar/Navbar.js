@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import AuthContext from "../../../context/authContext/authContext";
 const Navbar = () => {
-  const { logout, clearError, userAuth } = useContext(AuthContext);
+  const { logout, clearError, userAuth, user } = useContext(AuthContext);
 
   const onLogout = () => {
     logout();
     clearError();
   };
+  console.log(user);
 
   const userLinks = (
     <>
-      <li>Hello, {""}</li>
+      <li>Hello, {user && user.name}</li>
       <span className="sm-hide">|</span>
       <li>
         <a href="#" onClick={onLogout}>

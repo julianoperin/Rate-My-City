@@ -6,10 +6,25 @@ import {
   SET_ERROR,
   CLEAR_ERROR,
   LOG_OUT,
+  SET_USER,
+  AUTH_ERROR,
 } from "../types.js";
 
 export default (state, action) => {
   switch (action.type) {
+    case SET_USER:
+      return {
+        ...state,
+        user: action.payload,
+        userAuth: true,
+        errors: null,
+      };
+    case AUTH_ERROR:
+      return {
+        ...state,
+        userAuth: null,
+        errors: action.payload,
+      };
     case SUCCESS_REGISTER:
     case SUCCESS_LOGIN:
       localStorage.setItem("token", action.payload.token);
