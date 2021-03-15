@@ -37,13 +37,13 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         guests: state.guests.map((guest) =>
-          guest.id === payload.id ? payload : guest
+          guest._id === payload._id ? payload : guest
         ),
       };
     case REMOVE_GUEST:
       return {
         ...state,
-        guests: state.guests.filter((item) => item.id !== payload),
+        guests: state.guests.filter((item) => item._id !== payload),
       };
     case ADD_GUEST:
       return {

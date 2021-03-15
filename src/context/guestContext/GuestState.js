@@ -66,21 +66,40 @@ const GuestState = (props) => {
   };
 
   //! Add Guest
-  const addGuest = (guest) => {
-    guest.id = Date.now();
+  const addGuest = async (guest) => {
+    const config = {
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const res = await axios.post("/guests", guest, config);
+      dispatch({
+        type: ADD_GUEST,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: GUESTS_ERROR,
+        payload: err.response.msg,
+      });
+    }
     guest.isConfirmed = false;
-    dispatch({
-      type: ADD_GUEST,
-      payload: guest,
-    });
   };
 
   //! Remove Guest
-  const removeGuest = (id) => {
-    dispatch({
-      type: REMOVE_GUEST,
-      payload: id,
-    });
+  const removeGuest = async (id) => {
+    try {
+      await axios.delete(`/guests/${id}`);
+      dispatch({
+        type: REMOVE_GUEST,
+        payload: id,
+      });
+    } catch (err) {
+      dispatch({
+        type: GUESTS_ERROR,
+        payload: err.response.msg,
+      });
+    }
   };
 
   //! Update Guest
