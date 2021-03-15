@@ -9,7 +9,6 @@ const Navbar = () => {
     logout();
     clearError();
   };
-  console.log(user);
 
   const userLinks = (
     <>

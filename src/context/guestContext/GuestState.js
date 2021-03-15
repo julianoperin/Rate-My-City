@@ -10,39 +10,38 @@ import {
   UPDATE_GUEST,
   CLEAR_GUEST,
   EDIT_GUEST,
+  GUESTS_ERROR,
+  GET_GUESTS,
 } from "../types";
+
+import axios from "axios";
 
 const GuestState = (props) => {
   const initialState = {
     filterGuest: false,
     search: null,
     editAble: null,
-    guests: [
-      {
-        id: 1,
-        name: "Jake Smith",
-        phone: "333 444 555",
-        dietary: "Vegan",
-        isConfirmed: true,
-      },
-      {
-        id: 2,
-        name: "Jane Leonida",
-        phone: "333 444 555",
-        dietary: "Non-Veg",
-        isConfirmed: true,
-      },
-      {
-        id: 3,
-        name: "Carla Spohr",
-        phone: "333 444 555",
-        dietary: "Pescetarian",
-        isConfirmed: false,
-      },
-    ],
+    guests: [],
+    errors: null,
   };
 
   const [state, dispatch] = useReducer(guestReducer, initialState);
+
+  //! Get Guests
+  const getGuests = async () => {
+    try {
+      const res = await axios.get("/guests");
+      dispatch({
+        type: GET_GUESTS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: GUESTS_ERROR,
+        payload: err.response.msg,
+      });
+    }
+  };
 
   //! Filter Guest
   const toggleFilter = () => {
@@ -123,6 +122,7 @@ const GuestState = (props) => {
         updateGuest,
         clearGuest,
         editGuest,
+        getGuests,
       }}
     >
       {props.children}

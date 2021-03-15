@@ -7,10 +7,22 @@ import {
   UPDATE_GUEST,
   EDIT_GUEST,
   CLEAR_GUEST,
+  GET_GUESTS,
+  GUESTS_ERROR,
 } from "../types";
 
 export default (state, { type, payload }) => {
   switch (type) {
+    case GET_GUESTS:
+      return {
+        ...state,
+        guests: payload,
+      };
+    case GUESTS_ERROR:
+      return {
+        ...state,
+        errors: payload,
+      };
     case EDIT_GUEST:
       return {
         ...state,
