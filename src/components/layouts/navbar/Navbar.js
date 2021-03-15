@@ -1,13 +1,39 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 import AuthContext from "../../../context/authContext/authContext";
 const Navbar = () => {
-  const { logout, clearError } = useContext(AuthContext);
+  const { logout, clearError, userAuth } = useContext(AuthContext);
 
   const onLogout = () => {
     logout();
     clearError();
   };
+
+  const userLinks = (
+    <>
+      <li>Hello, {""}</li>
+      <span className="sm-hide">|</span>
+      <li>
+        <a href="#" onClick={onLogout}>
+          <span className="sm-hide">Logout</span>
+          <i className="fas fa-sign-out-alt"></i>
+        </a>
+      </li>
+    </>
+  );
+
+  const authLinks = (
+    <>
+      <li>
+        <Link to="/register">Register</Link>
+      </li>
+      <span className="sm-hide">|</span>
+      <li>
+        <Link to="/">Login</Link>
+      </li>
+    </>
+  );
 
   return (
     <div className="navbar">
@@ -17,16 +43,7 @@ const Navbar = () => {
           Weeding Planner
         </h1>
       </div>
-      <ul>
-        <li>Hello, Juliano</li>
-        <span className="sm-hide">|</span>
-        <li>
-          <a href="#" onClick={onLogout}>
-            <span className="sm-hide">Logout</span>
-            <i className="fas fa-sign-out-alt"></i>
-          </a>
-        </li>
-      </ul>
+      <ul>{userAuth ? userLinks : authLinks}</ul>
     </div>
   );
 };
