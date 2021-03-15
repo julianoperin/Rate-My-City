@@ -88,6 +88,9 @@ const GuestState = (props) => {
 
   //! Remove Guest
   const removeGuest = async (id) => {
+    const config = {
+      "Content-Type": "application/json",
+    };
     try {
       await axios.delete(`/guests/${id}`);
       dispatch({
@@ -103,11 +106,23 @@ const GuestState = (props) => {
   };
 
   //! Update Guest
-  const updateGuest = (guest) => {
-    dispatch({
-      type: UPDATE_GUEST,
-      payload: guest,
-    });
+  const updateGuest = async (guest) => {
+    const config = {
+      "Content-Type": "application/json",
+    };
+
+    try {
+      const res = await axios.put(`/guests/${guest._id}`, guest, config);
+      dispatch({
+        type: UPDATE_GUEST,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: GUESTS_ERROR,
+        payload: err.response.msg,
+      });
+    }
   };
 
   //! Edit Guest
