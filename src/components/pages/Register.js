@@ -37,7 +37,7 @@ const Register = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (password !== password2) {
-      setError({ msg: "Passowords does not match" });
+      setError({ msg: "Passwords does not match" });
     } else {
       registerUser({ name, email, password });
       clearError();

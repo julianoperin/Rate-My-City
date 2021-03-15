@@ -8,6 +8,7 @@ import {
   FAIL_LOGIN,
   SET_ERROR,
   CLEAR_ERROR,
+  LOG_OUT,
 } from "../types.js";
 
 import axios from "axios";
@@ -79,6 +80,12 @@ const AuthState = (props) => {
     });
   };
 
+  const logout = () => {
+    dispatch({
+      type: LOG_OUT,
+    });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -88,6 +95,7 @@ const AuthState = (props) => {
         loginUser,
         setError,
         clearError,
+        logout,
       }}
     >
       {props.children}
