@@ -9,6 +9,7 @@ import {
   CLEAR_GUEST,
   GET_GUESTS,
   GUESTS_ERROR,
+  CLEAR_FILTER,
 } from "../types";
 
 export default (state, { type, payload }) => {
@@ -32,6 +33,10 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         editAble: null,
+      };
+    case CLEAR_FILTER:
+      return {
+        guests: [],
       };
     case UPDATE_GUEST:
       return {

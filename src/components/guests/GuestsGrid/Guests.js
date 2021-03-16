@@ -10,15 +10,19 @@ const Guests = () => {
   }, []);
 
   return (
-    <div className="guests">
-      {search !== null
-        ? search.map((guest) => <Guest key={guest._id} guest={guest} />)
-        : guests
-            .filter((guest) => !filterGuest || guest.isConfirmed)
-            .map((guest) => {
-              return <Guest key={guest._id} guest={guest} />;
-            })}
-    </div>
+    <>
+      {guests.length > 0 && (
+        <div className="guests">
+          {search !== null
+            ? search.map((guest) => <Guest key={guest._id} guest={guest} />)
+            : guests
+                .filter((guest) => !filterGuest || guest.isConfirmed)
+                .map((guest) => {
+                  return <Guest key={guest._id} guest={guest} />;
+                })}
+        </div>
+      )}
+    </>
   );
 };
 export default Guests;

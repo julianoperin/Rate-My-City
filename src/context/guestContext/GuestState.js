@@ -12,6 +12,7 @@ import {
   EDIT_GUEST,
   GUESTS_ERROR,
   GET_GUESTS,
+  CLEAR_FILTER,
 } from "../types";
 
 import axios from "axios";
@@ -141,6 +142,13 @@ const GuestState = (props) => {
     });
   };
 
+  //! Clear Filter
+  const clearFilter = () => {
+    dispatch({
+      type: CLEAR_FILTER,
+    });
+  };
+
   return (
     <GuestContext.Provider
       value={{
@@ -157,6 +165,7 @@ const GuestState = (props) => {
         clearGuest,
         editGuest,
         getGuests,
+        clearFilter,
       }}
     >
       {props.children}

@@ -3,7 +3,6 @@ import GuestContext from "../../../context/guestContext/guestContext";
 
 const GuestCounter = () => {
   const { guests } = useContext(GuestContext);
-
   const totalInvited = guests.length;
   const attending = guests.filter((guest) => guest.isConfirmed);
   const totalAttending = attending.length;
